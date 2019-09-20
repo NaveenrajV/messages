@@ -1,0 +1,119 @@
+$primary_color: rgb(235, 151, 118);
+$input_border_color: #c1cbd4;
+$secondary_color: #f9fafa;
+
+.contact_form {
+  height: 300px;
+  padding: 30px;
+  padding-bottom: 0px;
+  background-color: $secondary_color;
+
+  .input {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    .text {
+      height: 20px;
+      padding: 10px;
+      margin-bottom: 5px;
+      border: 1px solid $input_border_color;
+      border-radius: 3px;
+      &:focus {
+        outline: 2.5px solid rgba(0, 0, 255, 0.377);
+      }
+    }
+
+    .message_area {
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+      padding-bottom: 2px;
+      height: 60px;
+      margin-bottom: 10px;
+      border: 1px solid $input_border_color;
+      border-radius: 3px;
+      textarea {
+        height: 60px;
+        border: none;
+        resize: none;
+        outline: none;
+        font-family: sans-serif;
+      }
+      img {
+        align-self: flex-end;
+        height: 30px;
+        opacity: 0.6;
+        cursor: pointer;
+      }
+      &:focus {
+        border: 2.5px solid rgba(0, 0, 255, 0.377);
+      }
+    }
+    .message_button {
+      background-color: $primary_color;
+      text-align: center;
+      border-radius: 10px;
+      cursor: pointer;
+      .input {
+        padding: 18px;
+        border-radius: 5px;
+        margin: auto;
+        background-color: $primary_color;
+        border: none;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+  .fileInput {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    .selectedFiles {
+      box-sizing: border-box;
+      height: 20px;
+      width: 50px;
+      color: white;
+      border-radius: 10px;
+      background-color: $input_border_color;
+      font-size: 12px;
+      text-align: center;
+      opacity: 0.8;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    .image {
+      opacity: 0.5;
+      &:hover {
+        opacity: 1;
+      }
+    }
+    [type="file"] {
+      height: 0;
+      overflow: hidden;
+      width: 0;
+    }
+  }
+}
+.link_button {
+  justify-self: flex-end;
+  align-self: center;
+  margin-top: 55%;
+  margin-bottom: 10px;
+  a {
+    img {
+      height: 20px;
+      opacity: 0.5;
+      cursor: pointer;
+    }
+  }
+}

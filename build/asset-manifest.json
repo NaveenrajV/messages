@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.dcdbb0f2.chunk.css",
+    "main.js": "/static/js/main.9d72327b.chunk.js",
+    "main.js.map": "/static/js/main.9d72327b.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.80bf2267.js",
+    "runtime~main.js.map": "/static/js/runtime~main.80bf2267.js.map",
+    "static/js/2.b56e854c.chunk.js": "/static/js/2.b56e854c.chunk.js",
+    "static/js/2.b56e854c.chunk.js.map": "/static/js/2.b56e854c.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.aad967efc10160eebadd1ea1bba31683.js": "/precache-manifest.aad967efc10160eebadd1ea1bba31683.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.dcdbb0f2.chunk.css.map": "/static/css/main.dcdbb0f2.chunk.css.map",
+    "static/media/chatBubble.svg": "/static/media/chatBubble.81022fdc.svg",
+    "static/media/checked.svg": "/static/media/checked.7634049c.svg",
+    "static/media/email.svg": "/static/media/email.4c74fb33.svg",
+    "static/media/left-arrow.svg": "/static/media/left-arrow.a261ec0e.svg",
+    "static/media/lock.svg": "/static/media/lock.2da83f11.svg",
+    "static/media/plane1.svg": "/static/media/plane1.6ee7244a.svg",
+    "static/media/user.svg": "/static/media/user.1b8be325.svg"
+  }
+}

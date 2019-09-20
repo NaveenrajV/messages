@@ -1,0 +1,200 @@
+.container {
+  height: 80%;
+  width: 340px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  border-radius: 4px;
+  background-color: #f9fafa;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.4) -1px -1px 15px;
+          box-shadow: rgba(0, 0, 0, 0.4) -1px -1px 15px;
+  position: absolute;
+  z-index: 100;
+  top: 2%;
+  right: 2%;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.container .header {
+  background-color: #eb9776;
+  padding: 2px 10px;
+  padding-bottom: 32px;
+  height: 150px;
+}
+
+.container .header .header_nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 0.8rem;
+}
+
+.container .header .header_nav .back_arrow img {
+  height: 30px;
+  width: 12px;
+  cursor: pointer;
+}
+
+.container .header .header_nav .title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  color: white;
+}
+
+.container .header .previousHeader {
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.container .header .header_content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  line-height: 1.5;
+  color: #f6cebf;
+  font-size: 0.8rem;
+  margin-top: 70px;
+}
+
+.container .header .header_content .content_1 {
+  color: white;
+  font-size: 0.9rem;
+}
+
+.container .link_button {
+  justify-self: flex-end;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  margin-bottom: 10px;
+}
+
+.container .link_button a img {
+  height: 20px;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.container .email_card {
+  height: 70px;
+  padding: 20px;
+  position: relative;
+  background-color: white;
+  margin: 0 10px;
+  margin-top: -20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 4px;
+  line-height: 0.8;
+  cursor: pointer;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px 0px;
+          box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px 0px;
+  -webkit-transition: -webkit-box-shadow 200ms linear 0s, -webkit-transform 200ms linear 0s;
+  transition: -webkit-box-shadow 200ms linear 0s, -webkit-transform 200ms linear 0s;
+  transition: box-shadow 200ms linear 0s, transform 200ms linear 0s;
+  transition: box-shadow 200ms linear 0s, transform 200ms linear 0s, -webkit-box-shadow 200ms linear 0s, -webkit-transform 200ms linear 0s;
+}
+
+.container .email_card img {
+  width: 50px;
+  margin-right: 20px;
+}
+
+.container .email_card .heading {
+  color: #34444f;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.container .email_card .sub_heading {
+  color: #72808e;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.container .email_card:hover {
+  -webkit-transform: translateY(-5px);
+          transform: translateY(-5px);
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px 0px;
+          box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 20px 0px;
+}
+
+.container .AfterSend {
+  text-align: center;
+  margin: 100px 30px;
+  line-height: 1.5;
+}
+
+.container .AfterSend p {
+  color: #72808e;
+  font-size: 13px;
+}
+
+.container .AfterSend p .previous {
+  color: #0077cc;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.container .AfterSend p .previous:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.container .AfterSend span {
+  color: #2a3b47;
+  font-size: 1.25em;
+}
+
+.circle {
+  background-color: #eb9776;
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  z-index: -1;
+  top: 26%;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+
+@media (max-width: 500px) {
+  .container {
+    width: 100%;
+    top: 0;
+    right: 0;
+  }
+}
+/*# sourceMappingURL=Chat.module.css.map */

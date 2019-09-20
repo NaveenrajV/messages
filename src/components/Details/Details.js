@@ -1,0 +1,122 @@
+import React, { useEffect } from "react";
+import Detail from "../Detail/Detail";
+import Login from "../Login/Login";
+import firebase from "firebase";
+import { connect } from "react-redux";
+import { logout } from "../../actions/actions";
+import classes from "./Details.module.css";
+import "./Table.module.css";
+
+const Details = props => {
+  let data,
+    keys,
+    list = [];
+
+  /*eslint-disable */
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (!user) {
+        localStorage.removeItem("data");
+        localStorage.removeItem("isLogged");
+        props.logout();
+      }
+    });
+  }, []);
+  /*eslint-enable */
+
+  if (props.data !== undefined) {
+    data = props.data;
+    keys = Object.keys(data);
+  }
+
+  if (!props.isLogged) {
+    const loggedUser = "naveen";
+    list = keys
+      .map(key => {
+        if (data[key][loggedUser] === undefined) return null;
+        return (
+          <Detail
+            key={key}
+            id={key}
+            name={data[key][loggedUser].name}
+            message={data[key][loggedUser].message}
+            subject={data[key][loggedUser].subject}
+            email={data[key][loggedUser].email}
+          />
+        );
+      })
+      .filter(elem => elem);
+  } else {
+    list = keys.map(key => {
+      let user = Object.keys(data[key]);
+      return (
+        <Detail
+          key={key + Date.now()}
+          id={key}
+          name={data[key][user].name}
+          message={data[key][user].message}
+          subject={data[key][user].subject}
+          email={data[key][user].email}
+        />
+      );
+    });
+  }
+
+  return (
+    <div className={classes.Details}>
+      <div className={classes.title}>
+        <div
+          className={classes.logout}
+          onClick={() => firebase.auth().signOut()}
+        >
+          <p> LOGOUT</p>
+          {/* <div className={classes.button}>LOGOUT</div> */}
+          {/* <img src={Logout} alt="Logout" title="Logout" /> */}
+        </div>
+      </div>
+      {props.isLogged ? (
+        list.length !== 0 ? (
+          <div className={classes.table}>
+            <center>
+              <h2>Records</h2>
+            </center>
+            <center>
+              <table className={classes.table}>
+                <thead>
+                  <tr key={Date.now()}>
+                    <th key="name">Name</th>
+                    <th key="email">Email</th>
+                    <th key="subject">Subject</th>
+                    <th key="message">Message</th>
+                  </tr>
+                </thead>
+                <tbody>{list}</tbody>
+              </table>
+            </center>
+          </div>
+        ) : (
+          <div className={classes.noData}>
+            <div className={classes.content}>
+              No data to display. <br />
+              Send message to see data{" "}
+            </div>
+          </div>
+        )
+      ) : (
+        <Login />
+      )}
+    </div>
+  );
+};
+const mapStateToProps = state => ({
+  loading: state.loading,
+  isLogged: state.isLogged || localStorage.getItem("isLogged"),
+  data: state.data || localStorage.getItem("data")
+});
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logout())
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Details);

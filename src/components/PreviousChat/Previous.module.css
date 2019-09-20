@@ -1,0 +1,72 @@
+.messages {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 8px 10px;
+  background-color: #f9fafa;
+}
+
+.messages .card {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  height: 90px;
+  padding: 20px;
+  border: 1px solid #d3dbe1;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 5px;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  background-color: white;
+  cursor: pointer;
+}
+
+.messages .card .title {
+  color: #3083d0;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.messages .card .tick {
+  margin-right: 5px;
+}
+
+.messages .card .tick img {
+  height: 10px;
+}
+
+.messages .card .received {
+  color: #94a2b0;
+  font-size: 12px;
+}
+
+.messages .card .waiting {
+  color: #a9b5c0;
+  font-size: 12px;
+}
+
+.messages .card:hover {
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.loginMessage {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #3083d0;
+}
+/*# sourceMappingURL=Previous.module.css.map */

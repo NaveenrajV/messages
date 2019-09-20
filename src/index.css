@@ -1,0 +1,21 @@
+body,
+html {
+  font-family: -apple-system, BlinkMacSystemFont, "Open sans", "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  /* background-color: #c9d6df; */
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  /* background-image: url("../src/assets/Abstract-Envelope.svg"); */
+  /* background-size: cover; */
+  /* background-attachment: fixed; */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}

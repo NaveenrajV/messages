@@ -1,0 +1,55 @@
+$title: #3083d0;
+$received: #94a2b0;
+$waiting: #a9b5c0;
+$secondary_color: #f9fafa;
+.messages {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 10px;
+  background-color: $secondary_color;
+  .card {
+    box-sizing: border-box;
+    height: 90px;
+    padding: 20px;
+    border: 1px solid #d3dbe1;
+    border-radius: 4px;
+    width: 100%;
+    margin-bottom: 5px;
+    // box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s linear;
+    background-color: white;
+    cursor: pointer;
+    .title {
+      color: $title;
+      font-size: 12px;
+      // font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .tick {
+      margin-right: 5px;
+      img {
+        height: 10px;
+      }
+    }
+    .received {
+      color: $received;
+      font-size: 12px;
+    }
+    .waiting {
+      color: $waiting;
+      font-size: 12px;
+    }
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+.loginMessage {
+  display: flex;
+  // margin: auto;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: $title;
+}

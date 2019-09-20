@@ -1,0 +1,75 @@
+.chat_icon {
+  background-color: #eb9776;
+  height: 100px;
+  width: 200px;
+  border: 1px solid black;
+}
+
+.logout {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.Details {
+  height: 100%;
+}
+
+.Details .title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  border-bottom: 2px solid #eb9776;
+  padding: 10px;
+}
+
+.Details .title .logout {
+  background-color: #828282;
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+          box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+  font-size: 15px;
+  font-weight: bold;
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: auto;
+  color: white;
+  border-radius: 20px;
+}
+
+.Details .title .logout:hover {
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.7);
+          box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.7);
+}
+
+.noData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.noData .content {
+  background-color: white;
+  text-align: center;
+  padding: 50px;
+  border-radius: 10px;
+}
+/*# sourceMappingURL=Details.module.css.map */

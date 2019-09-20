@@ -1,0 +1,54 @@
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+.App {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; */
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.Icon {
+  position: fixed;
+  bottom: 2%;
+  right: 2%;
+  height: 50px;
+  width: 50px;
+  padding: 5px;
+  background-color: rgb(235, 151, 118);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  animation: fadein 2s;
+  animation-delay: .5s;
+}
+
+.Icon img {
+  width: 40%;
+  height: 40%;
+}
+
+
+.Icon:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 5px 10px 2px;
+  background-color: rgb(218, 147, 119);
+
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
