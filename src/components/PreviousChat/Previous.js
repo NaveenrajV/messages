@@ -4,16 +4,15 @@ import classes from "./Previous.module.css";
 import ticked from "../../assets/checked.svg";
 const Previous = props => {
   let data, keys, list;
-  if (props.data !== undefined) {
+
+  if (props.data !== "null") {
     data = props.data;
     keys = Object.keys(data);
-  }
-  if (props.isLogged) {
-    const loggedUser = "naveen";
-    list = keys.map(key => {
-      if (data[key][loggedUser] === undefined) return null;
-      return <MessageCard id={key} message={data[key][loggedUser].message} />;
-    });
+    list = keys
+      .map(key => {
+        return <MessageCard key={key} id={key} message={data[key].message} />;
+      })
+      .filter(elem => elem);
   } else {
     list = (
       <div className={classes.loginMessage}>

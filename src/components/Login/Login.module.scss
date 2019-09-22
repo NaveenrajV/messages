@@ -12,8 +12,8 @@ $secondary_color: #f9fafa;
   display: flex;
   flex-direction: column;
   border-radius: 20px;
-  border: 2px solid grey;
-  box-shadow: grey 0px 0px 15px 5px;
+  // border: 2px solid grey;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px 1px;
   background-color: white;
   padding: 30px;
   .title {

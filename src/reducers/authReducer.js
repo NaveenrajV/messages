@@ -23,6 +23,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         loading: false,
         isLogged: true,
         data: action.data,
+        name: action.name,
         loginStatus: "success"
       };
     case AUTH_FAIL:

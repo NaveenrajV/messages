@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { logout } from "../../actions/actions";
 import classes from "./Details.module.css";
 import "./Table.module.css";
+import noData from "../../assets/noData.jpg";
 
 const Details = props => {
   let data,
@@ -23,48 +24,32 @@ const Details = props => {
     });
   }, []);
   /*eslint-enable */
-
-  if (props.data !== undefined) {
+  if (props.data !== "null") {
     data = props.data;
     keys = Object.keys(data);
-  }
-
-  if (!props.isLogged) {
-    const loggedUser = "naveen";
     list = keys
       .map(key => {
-        if (data[key][loggedUser] === undefined) return null;
         return (
           <Detail
             key={key}
             id={key}
-            name={data[key][loggedUser].name}
-            message={data[key][loggedUser].message}
-            subject={data[key][loggedUser].subject}
-            email={data[key][loggedUser].email}
+            name={data[key].name}
+            message={data[key].message}
+            subject={data[key].subject}
+            email={data[key].email}
           />
         );
       })
       .filter(elem => elem);
-  } else {
-    list = keys.map(key => {
-      let user = Object.keys(data[key]);
-      return (
-        <Detail
-          key={key + Date.now()}
-          id={key}
-          name={data[key][user].name}
-          message={data[key][user].message}
-          subject={data[key][user].subject}
-          email={data[key][user].email}
-        />
-      );
-    });
+    list.splice(0, 1);
   }
 
   return (
     <div className={classes.Details}>
       <div className={classes.title}>
+        <div className={classes.welcome}>
+          Welcome <span>{props.name}</span>
+        </div>
         <div
           className={classes.logout}
           onClick={() => firebase.auth().signOut()}
@@ -97,6 +82,8 @@ const Details = props => {
         ) : (
           <div className={classes.noData}>
             <div className={classes.content}>
+              <img src={noData} alt="no data found" />
+              <br />
               No data to display. <br />
               Send message to see data{" "}
             </div>
@@ -111,7 +98,8 @@ const Details = props => {
 const mapStateToProps = state => ({
   loading: state.loading,
   isLogged: state.isLogged || localStorage.getItem("isLogged"),
-  data: state.data || localStorage.getItem("data")
+  data: state.data || localStorage.getItem("data"),
+  name: state.name || localStorage.getItem("name")
 });
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout())

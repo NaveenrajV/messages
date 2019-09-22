@@ -11,28 +11,43 @@ import {
 } from "../actions/actions";
 
 export function register(action) {
-  const { password, email } = action.payload;
+  const { password, email, name } = action.payload;
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
-    .then(user => alert("Registered successfully"))
+    .then(userData => {
+      const uid = userData.user.uid;
+      firebase
+        .database()
+        .ref(`${uid}`)
+        .push({
+          name,
+          email,
+          conversations: []
+        });
+      console.log(userData.user);
+      console.log(userData.user.uid);
+      alert("Registered successfully");
+      firebase.database().ref(`${name}`);
+      // .push({ empty: "sas" });
+    })
     .catch(err => console.log(err));
 }
 
 export function* update(action) {
+  // console.log(`update /${action.data.name}`);
   let data;
-  const user = action.data.name;
-  const recentPostsRef = firebase.database().ref("/details");
+  const { name, email, message, subject } = action.data;
+  const uid = firebase.auth().currentUser.uid;
+  const recentPostsRef = firebase.database().ref(`/${uid}`);
   firebase
     .database()
-    .ref("details")
+    .ref(`${uid}`)
     .push({
-      [user]: {
-        email: action.data.email,
-        name: user,
-        message: action.data.message,
-        subject: action.data.subject
-      }
+      email,
+      name,
+      message,
+      subject
     });
 
   yield recentPostsRef.once("value").then(snapshot => {
@@ -46,18 +61,25 @@ async function authenticateLogin(email, password) {
 }
 
 function* validateLogin(action) {
-  let data;
+  let data, key, name, nameRef;
   const { email, password } = action.payload;
   try {
     yield call(authenticateLogin, email, password);
     yield put({ type: LOADING });
-    const recentPostsRef = firebase.database().ref("/details");
+    const uid = firebase.auth().currentUser.uid;
+    const recentPostsRef = firebase.database().ref(`/${uid}`);
     yield recentPostsRef.once("value").then(snapshot => {
       data = snapshot.val();
     });
+    key = Object.keys(data)[0];
+    nameRef = firebase.database().ref(`/${uid}/${key}/name`);
+    yield nameRef.once("value").then(snapshot => {
+      name = snapshot.val();
+    });
     localStorage.setItem("isLogged", true);
+    localStorage.setItem("name", name);
     localStorage.setItem("data", JSON.stringify(data));
-    yield put({ data, type: AUTH_SUCCESS });
+    yield put({ data, name, type: AUTH_SUCCESS });
   } catch (e) {
     console.log(e);
     yield put({ type: AUTH_FAIL });

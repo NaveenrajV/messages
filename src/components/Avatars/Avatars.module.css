@@ -16,6 +16,7 @@
   -webkit-transform: translateY(-10px);
           transform: translateY(-10px);
   opacity: 0.9;
+  margin: 0;
 }
 
 .header_avatars .avatar img {
@@ -29,33 +30,41 @@
           box-shadow: 0 5px 8px -8px;
 }
 
-.avatar1 {
+/*.avatar1 {
   position: absolute;
-  left: 15px;
+  left: 1em;
   z-index: 1;
 }
-
 .avatar2 {
   position: absolute;
-  left: 62px;
+  left: 4em;
   z-index: 2;
 }
-
 .avatar3 {
   position: absolute;
-  left: 110px;
+  left: 6.9em;
   z-index: 3;
 }
-
 .avatar4 {
   position: absolute;
-  left: 157px;
+  left: 10em;
   z-index: 2;
 }
-
 .avatar5 {
   position: absolute;
-  left: 203px;
+  left: 12.7em;
   z-index: 1;
 }
+
+@media (max-width: 350px) {
+  .avatar {
+    margin-left: 450px;
+  }
+}
+@media (max-width: 450px) {
+  .avatar {
+    margin-left: 200px;
+  }
+}
+*/
 /*# sourceMappingURL=Avatars.module.css.map */
