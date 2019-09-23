@@ -29,6 +29,7 @@ const ContactForm = props => {
     const name = e.target.files[0].name;
     addFiles(prevState => prevState.concat(name));
   };
+  console.log({ isLogged: props.isLogged });
 
   return props.isLogged === true ? (
     <>
