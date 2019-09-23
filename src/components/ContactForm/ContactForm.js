@@ -10,7 +10,9 @@ const ContactForm = props => {
   const nameRef = useRef(null);
 
   useEffect(() => {
-    if (props.isLogged === true) nameRef.current.focus();
+    if (props.isLogged === true) {
+      nameRef.current.focus()
+    };
   }, []);
 
   const [name, setName] = useState("");
