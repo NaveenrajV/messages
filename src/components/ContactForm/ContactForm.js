@@ -10,7 +10,7 @@ const ContactForm = props => {
   const nameRef = useRef(null);
 
   useEffect(() => {
-    nameRef.current.focus();
+    if (props.isLogged === true) nameRef.current.focus();
   }, []);
 
   const [name, setName] = useState("");
@@ -29,8 +29,9 @@ const ContactForm = props => {
     const name = e.target.files[0].name;
     addFiles(prevState => prevState.concat(name));
   };
+  console.log({ isLogged: props.isLogged });
 
-  return (
+  return props.isLogged === true ? (
     <>
       <form onSubmit={e => submitHandler(e)}>
         <div className={classes.contact_form}>
@@ -111,6 +112,10 @@ const ContactForm = props => {
         </a>
       </div>
     </>
+  ) : (
+    <div className={classes.notLogged}>
+      <p>Login to send messages</p>
+    </div>
   );
 };
 
@@ -118,8 +123,10 @@ const mapDispatchToProps = dispatch => ({
   addMessage: (name, email, message, subject) =>
     dispatch(addMsg(name, email, message, subject))
 });
-
+const mapStateToProps = state => ({
+  isLogged: state.isLogged
+});
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ContactForm);
