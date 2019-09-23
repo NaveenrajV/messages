@@ -149,4 +149,12 @@
   opacity: 0.5;
   cursor: pointer;
 }
+
+.notLogged {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: auto;
+  color: #3083d0;
+}
 /*# sourceMappingURL=ContactForm.module.css.map */
