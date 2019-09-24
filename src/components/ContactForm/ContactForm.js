@@ -8,15 +8,15 @@ import { SENDED } from "../Chat/Chat";
 
 const ContactForm = props => {
   const nameRef = useRef(null);
-
+  /*eslint-disable */
   useEffect(() => {
     if (props.isLogged === true) {
       nameRef.current.focus();
     }
   }, []);
-
-  const [name, setName] = useState(props.name);
-  const [email, setEmail] = useState(props.email);
+  /*eslint-enable */
+  const name = props.name;
+  const email = props.email;
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [selectedFiles, addFiles] = useState([]);
@@ -44,6 +44,7 @@ const ContactForm = props => {
               name="name"
               ref={nameRef}
               value={name}
+              readOnly
               required
             />
             <input
@@ -60,7 +61,7 @@ const ContactForm = props => {
               placeholder="Email"
               name="email"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              readOnly
               required
             />
             <div className={classes.message_area}>

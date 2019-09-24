@@ -1,41 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { login, register, AUTH_SUCCESS } from "../../actions/actions";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner/Spinner";
 import classes from "./Login.module.css";
 import emailIcon from "../../assets/email.svg";
 import passwordIcon from "../../assets/lock.svg";
-import userIcon from "../../assets/user.svg";
+import { Link } from "react-router-dom";
 
 const Login = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [isLogin, setIsLogin] = useState(true);
-
-  const reset = () => {
-    setEmail("");
-    setPassword("");
-    setName("");
-  };
 
   const formSubmitHandler = event => {
     event.preventDefault();
-    if (isLogin) {
-      props.authLogin(email, password);
-    } else {
-      const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-      const pwd = document.querySelector("#password").value;
-      if (regex.test(pwd)) {
-        props.register(name, email, password);
-        setTimeout(() => {
-          setIsLogin(true);
-          reset();
-        }, 2000);
-      } else {
-        document.querySelector(".password").style.display = "block";
-      }
-    }
+    const history = props.history;
+    props.authLogin(email, password, history);
   };
   /*eslint-disable */
 
@@ -47,7 +26,6 @@ const Login = props => {
   }, []);
 
   /*eslint-enable */
-
   return props.loading ? (
     <Spinner />
   ) : (
@@ -56,25 +34,7 @@ const Login = props => {
         className={classes.Login}
         onSubmit={event => formSubmitHandler(event)}
       >
-        <div className={classes.title}>{isLogin ? "LOGIN" : "REGISTER"}</div>
-        {isLogin ? null : (
-          <div className={classes.text}>
-            <input
-              autoFocus={true}
-              autoComplete="off"
-              type="text"
-              className={classes.input}
-              placeholder="Username"
-              name="username"
-              value={name}
-              onChange={e => setName(e.target.value.trim())}
-              required
-            />
-            <div className={classes.icon}>
-              <img src={userIcon} alt="" />
-            </div>
-          </div>
-        )}
+        <div className={classes.title}> LOGIN</div>
         <div className={classes.text}>
           <input
             className={classes.input}
@@ -105,77 +65,45 @@ const Login = props => {
             <img src={passwordIcon} alt="" />
           </div>
         </div>
-        {isLogin ? null : (
-          <center>
-            <div
-              className={[classes.error, "password"].join(" ")}
-              style={{ fontSize: "12px", fontWeight: "bold", display: "none" }}
-            >
-              Password must contain atleast one symbol,number,char
-            </div>
-          </center>
-        )}
 
-        {isLogin ? (
-          <>
-            {props.loginStatus === "error" ? (
-              <center>
-                <div className={classes.error}>Invalid credentials</div>
-              </center>
-            ) : null}
-            <button>Login</button>
-            <p className={classes.register}>
-              Not registered ?
+        <>
+          {props.loginStatus === "error" ? (
+            <center>
+              <div className={classes.error}>Invalid credentials</div>
+            </center>
+          ) : null}
+          <button>Login</button>
+          <p className={classes.register}>
+            Not registered ?
+            <Link to="/signup">
               <span
                 style={{
                   fontWeight: "bold",
                   cursor: "pointer",
                   margin: "0 5px"
-                }}
-                onClick={() => {
-                  setIsLogin(false);
-                  reset();
                 }}
               >
                 Create an account
               </span>
-            </p>
-          </>
-        ) : (
-          <>
-            <button>Register</button>
-            <p className={classes.register}>
-              Already have an account?
-              <span
-                style={{
-                  fontWeight: "bold",
-                  cursor: "pointer",
-                  margin: "0 5px"
-                }}
-                onClick={() => {
-                  setIsLogin(true);
-                  reset();
-                }}
-              >
-                Login here
-              </span>
-            </p>
-          </>
-        )}
+            </Link>
+          </p>
+        </>
       </form>
     </div>
   );
 };
 
 const mapDispatchToProps = dispatch => ({
-  authLogin: (email, password) => dispatch(login(email, password)),
+  authLogin: (email, password, history) =>
+    dispatch(login(email, password, history)),
   register: (name, email, password) =>
     dispatch(register(name, email, password)),
   logged: data => dispatch({ type: AUTH_SUCCESS, data: data })
 });
 const mapStateToProps = state => ({
   loading: state.loading,
-  loginStatus: state.loginStatus
+  loginStatus: state.loginStatus,
+  isLogged: state.isLogged
 });
 
 export default connect(

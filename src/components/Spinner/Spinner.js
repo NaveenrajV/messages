@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Login.module.css";
+import classes from "./signup.module.css";
 import "./spinner.css";
 
 const Spinner = () => (

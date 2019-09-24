@@ -3,16 +3,16 @@ import {
   AUTH_FAIL,
   UPDATE_MESSAGES,
   LOADING,
-  LOGOUT
+  LOGOUT,
+  STOP_LOADING
 } from "../actions/actions";
 
 const INITIAL_STATE = {
   loading: false,
-  isLogged: false,
-  data: {
-    name: "",
-    id: ""
-  },
+  isLogged: JSON.parse(localStorage.getItem("isLogged")) || false,
+  name: localStorage.getItem("name") || "",
+  email: localStorage.getItem("email") || "",
+  data: JSON.parse(localStorage.getItem("data")) || {},
   loginStatus: ""
 };
 
@@ -44,6 +44,10 @@ const authReducer = (state = INITIAL_STATE, action) => {
     case LOADING:
       return {
         loading: true
+      };
+    case STOP_LOADING:
+      return {
+        loading: false
       };
     case LOGOUT:
       return {
