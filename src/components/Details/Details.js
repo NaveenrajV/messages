@@ -24,6 +24,7 @@ const Details = props => {
     });
   }, []);
   /*eslint-enable */
+
   if (props.data !== "null") {
     data = props.data;
     keys = Object.keys(data);
@@ -55,8 +56,6 @@ const Details = props => {
           onClick={() => firebase.auth().signOut()}
         >
           <p> LOGOUT</p>
-          {/* <div className={classes.button}>LOGOUT</div> */}
-          {/* <img src={Logout} alt="Logout" title="Logout" /> */}
         </div>
       </div>
       {props.isLogged ? (
@@ -85,7 +84,7 @@ const Details = props => {
               <img src={noData} alt="no data found" />
               <br />
               No data to display. <br />
-              Send message to see data{" "}
+              Send message to see data
             </div>
           </div>
         )

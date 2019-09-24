@@ -24,6 +24,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         isLogged: true,
         data: action.data,
         name: action.name,
+        email: action.email,
         loginStatus: "success"
       };
     case AUTH_FAIL:

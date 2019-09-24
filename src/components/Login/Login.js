@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import classes from "./Login.module.css";
 import { login, register, AUTH_SUCCESS } from "../../actions/actions";
 import Spinner from "./Spinner";
+import classes from "./Login.module.css";
 import emailIcon from "../../assets/email.svg";
 import passwordIcon from "../../assets/lock.svg";
 import userIcon from "../../assets/user.svg";
+
 const Login = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

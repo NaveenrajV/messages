@@ -25,17 +25,12 @@ export function register(action) {
           email,
           conversations: []
         });
-      console.log(userData.user);
-      console.log(userData.user.uid);
-      alert("Registered successfully");
       firebase.database().ref(`${name}`);
-      // .push({ empty: "sas" });
     })
     .catch(err => console.log(err));
 }
 
 export function* update(action) {
-  // console.log(`update /${action.data.name}`);
   let data;
   const { name, email, message, subject } = action.data;
   const uid = firebase.auth().currentUser.uid;
@@ -79,7 +74,7 @@ function* validateLogin(action) {
     localStorage.setItem("isLogged", true);
     localStorage.setItem("name", name);
     localStorage.setItem("data", JSON.stringify(data));
-    yield put({ data, name, type: AUTH_SUCCESS });
+    yield put({ data, name, email, type: AUTH_SUCCESS });
   } catch (e) {
     console.log(e);
     yield put({ type: AUTH_FAIL });

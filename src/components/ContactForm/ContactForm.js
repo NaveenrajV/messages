@@ -11,12 +11,12 @@ const ContactForm = props => {
 
   useEffect(() => {
     if (props.isLogged === true) {
-      nameRef.current.focus()
-    };
+      nameRef.current.focus();
+    }
   }, []);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState(props.name);
+  const [email, setEmail] = useState(props.email);
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [selectedFiles, addFiles] = useState([]);
@@ -43,7 +43,7 @@ const ContactForm = props => {
               placeholder="Name"
               name="name"
               ref={nameRef}
-              onChange={e => setName(e.target.value)}
+              value={name}
               required
             />
             <input
@@ -59,6 +59,7 @@ const ContactForm = props => {
               type="email"
               placeholder="Email"
               name="email"
+              value={email}
               onChange={e => setEmail(e.target.value)}
               required
             />
@@ -125,7 +126,9 @@ const mapDispatchToProps = dispatch => ({
     dispatch(addMsg(name, email, message, subject))
 });
 const mapStateToProps = state => ({
-  isLogged: state.isLogged
+  isLogged: state.isLogged,
+  email: state.email,
+  name: state.name
 });
 export default connect(
   mapStateToProps,
