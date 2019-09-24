@@ -1,4 +1,6 @@
 import firebase from "firebase";
+import "firebase/auth";
+import "firebase/database";
 import { takeLatest, put, call } from "redux-saga/effects";
 import {
   AUTH_FAIL,
@@ -7,27 +9,35 @@ import {
   REGISTER,
   UPDATE_MESSAGES,
   UPDATE_MESSAGE,
-  LOADING
+  LOADING,
+  STOP_LOADING
 } from "../actions/actions";
 
-export function register(action) {
-  const { password, email, name } = action.payload;
-  firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(userData => {
-      const uid = userData.user.uid;
-      firebase
-        .database()
-        .ref(`${uid}`)
-        .push({
-          name,
-          email,
-          conversations: []
-        });
-      firebase.database().ref(`${name}`);
-    })
-    .catch(err => console.log(err));
+async function registration(email, password) {
+  return await firebase.auth().createUserWithEmailAndPassword(email, password);
+}
+
+export function* register(action) {
+  const { password, email, name, history } = action.payload;
+  try {
+    yield put({ type: LOADING });
+    const userData = yield call(registration, email, password);
+    const uid = userData.user.uid;
+    firebase
+      .database()
+      .ref(`${uid}`)
+      .push({
+        name,
+        email,
+        conversations: []
+      });
+    firebase.database().ref(`${name}`);
+    yield put({ type: STOP_LOADING });
+    alert("Registered successfully");
+    history.push("/");
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export function* update(action) {
@@ -48,6 +58,7 @@ export function* update(action) {
   yield recentPostsRef.once("value").then(snapshot => {
     data = snapshot.val();
   });
+  localStorage.setItem("data", JSON.stringify(data));
   yield put({ data, type: UPDATE_MESSAGES });
 }
 
@@ -57,7 +68,7 @@ async function authenticateLogin(email, password) {
 
 function* validateLogin(action) {
   let data, key, name, nameRef;
-  const { email, password } = action.payload;
+  const { email, password, history } = action.payload;
   try {
     yield call(authenticateLogin, email, password);
     yield put({ type: LOADING });
@@ -71,8 +82,10 @@ function* validateLogin(action) {
     yield nameRef.once("value").then(snapshot => {
       name = snapshot.val();
     });
+    history.push("/home");
     localStorage.setItem("isLogged", true);
     localStorage.setItem("name", name);
+    localStorage.setItem("email", email);
     localStorage.setItem("data", JSON.stringify(data));
     yield put({ data, name, email, type: AUTH_SUCCESS });
   } catch (e) {

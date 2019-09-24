@@ -6,15 +6,16 @@ export const REGISTER = "REGISTER";
 export const UPDATE_MESSAGE = "UPDATE_MESSAGE";
 export const UPDATE_MESSAGES = "UPDATE_MESSAGES";
 export const LOADING = "LOADING";
+export const STOP_LOADING = "STOP_LOADING";
 
-export const login = (email, password) => ({
+export const login = (email, password, history) => ({
   type: AUTH_VALIDATION,
-  payload: { email, password }
+  payload: { email, password, history }
 });
 
-export const register = (name, email, password) => ({
+export const register = (name, email, password, history) => ({
   type: REGISTER,
-  payload: { name, email, password }
+  payload: { name, email, password, history }
 });
 
 export const addMsg = (name, email, message, subject) => ({
