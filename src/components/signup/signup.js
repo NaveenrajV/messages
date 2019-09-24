@@ -24,16 +24,6 @@ const Signup = props => {
       document.querySelector(".password").style.display = "block";
     }
   };
-  /*eslint-disable */
-
-  useEffect(() => {
-    if (localStorage.getItem("isLogged")) {
-      const data = JSON.parse(localStorage.getItem("data"));
-      props.logged(data);
-    }
-  }, []);
-
-  /*eslint-enable */
 
   return props.loading ? (
     <Spinner />
