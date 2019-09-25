@@ -21,7 +21,6 @@ function App(props) {
       transform: "rotate(-90deg)"
     };
   }
-
   return (
     <div className="App">
       <Router>

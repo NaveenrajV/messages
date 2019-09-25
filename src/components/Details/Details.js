@@ -86,14 +86,13 @@ const Details = props => {
     <Spinner />
   );
 };
-const mapStateToProps = state => {
-  return {
-    loading: state.loading,
-    isLogged: state.isLogged || localStorage.getItem("isLogged"),
-    data: state.data || localStorage.getItem("data"),
-    name: state.name || localStorage.getItem("name")
-  };
-};
+const mapStateToProps = state => ({
+  loading: state.loading,
+  isLogged: state.isLogged || localStorage.getItem("isLogged"),
+  data: state.data || localStorage.getItem("data"),
+  name: state.name || localStorage.getItem("name")
+});
+
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout_init())
 });
