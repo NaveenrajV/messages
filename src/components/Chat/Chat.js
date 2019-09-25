@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Avatars from "../Avatars/Avatars";
 import ContactForm from "../ContactForm/ContactForm";
 import Previous from "../PreviousChat/Previous";
-import classes from "./Chat.module.css";
 import back_arrow from "../../assets/left-arrow.svg";
 import help_scout from "../../assets/helpScout.jpg";
 import plane from "../../assets/plane1.svg";
+import classes from "./Chat.module.css";
 
 const FORM = "FORM",
   EMAIL = "EMAIL",

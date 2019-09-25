@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { login, register, AUTH_SUCCESS } from "../../actions/actions";
+import { login } from "../../actions/actionCreators";
+import { Link } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
-import classes from "./Login.module.css";
 import emailIcon from "../../assets/email.svg";
 import passwordIcon from "../../assets/lock.svg";
-import { Link } from "react-router-dom";
+import classes from "./Login.module.css";
 
 const Login = props => {
   const [email, setEmail] = useState("");
@@ -13,19 +13,9 @@ const Login = props => {
 
   const formSubmitHandler = event => {
     event.preventDefault();
-    const history = props.history;
-    props.authLogin(email, password, history);
+    props.authLogin(email, password);
   };
-  /*eslint-disable */
 
-  useEffect(() => {
-    if (localStorage.getItem("isLogged")) {
-      const data = JSON.parse(localStorage.getItem("data"));
-      props.logged(data);
-    }
-  }, []);
-
-  /*eslint-enable */
   return props.loading ? (
     <Spinner />
   ) : (
@@ -95,15 +85,11 @@ const Login = props => {
 
 const mapDispatchToProps = dispatch => ({
   authLogin: (email, password, history) =>
-    dispatch(login(email, password, history)),
-  register: (name, email, password) =>
-    dispatch(register(name, email, password)),
-  logged: data => dispatch({ type: AUTH_SUCCESS, data: data })
+    dispatch(login(email, password, history))
 });
 const mapStateToProps = state => ({
   loading: state.loading,
-  loginStatus: state.loginStatus,
-  isLogged: state.isLogged
+  loginStatus: state.loginStatus
 });
 
 export default connect(

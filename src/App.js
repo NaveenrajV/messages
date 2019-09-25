@@ -1,21 +1,18 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import ProtectedRoute from "./components/HOC/ProtectedRoute";
 import Details from "./components/Details/Details";
 import Chat from "./components/Chat/Chat";
+import Login from "./components/Login/Login";
+import Signup from "./components/signup/signup";
 import chatIcon from "./assets/chatBubble.svg";
 import closeIcon from "./assets/close1.png";
-import { connect } from "react-redux";
-import Login from "./components/Login/Login";
 import "./App.css";
-import Signup from "./components/signup/signup";
 
 function App(props) {
   let [displayChat, setToggle] = useState(false);
   let style;
-
-  const toggleChat = e => {
-    setToggle(prevState => !prevState);
-  };
 
   if (displayChat) {
     style = {
@@ -24,29 +21,45 @@ function App(props) {
       transform: "rotate(-90deg)"
     };
   }
+
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/" exact component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/home" component={Details} />
+          <ProtectedRoute
+            exact
+            path="/"
+            redirectTo="/home"
+            logged={!props.isLogged}
+            component={Login}
+          />
+          <ProtectedRoute
+            path="/signup"
+            redirectTo="/home"
+            logged={!props.isLogged}
+            component={Signup}
+          />
+          <ProtectedRoute
+            path="/home"
+            redirectTo="/"
+            logged={props.isLogged}
+            component={Details}
+          />
         </Switch>
         <Chat show={displayChat} />
-        <div className="Icon" onClick={e => toggleChat(e)}>
+        <div className="Icon" onClick={e => setToggle(prevState => !prevState)}>
           {displayChat ? (
             <img
-              className="closeIcon"
+              height="25px"
+              width="25px"
               style={{
-                ...style,
-                height: "25px",
-                width: "25px"
+                ...style
               }}
               src={closeIcon}
               alt="Chat Icon"
             />
           ) : (
-            <img src={chatIcon} style={style} alt="Chat Icon" />
+            <img src={chatIcon} className="styleAnimate" alt="Chat Icon" />
           )}
         </div>
       </Router>

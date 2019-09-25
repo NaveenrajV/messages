@@ -1,20 +1,12 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useState } from "react";
+import { addMsg } from "../../actions/actionCreators";
+import { connect } from "react-redux";
+import { SENDED } from "../Chat/Chat";
 import help_scout from "../../assets/helpScout.jpg";
 import add_image from "../../assets/Add_Image.png";
 import classes from "./ContactForm.module.css";
-import { addMsg } from "../../actions/actions";
-import { connect } from "react-redux";
-import { SENDED } from "../Chat/Chat";
 
 const ContactForm = props => {
-  const nameRef = useRef(null);
-  /*eslint-disable */
-  useEffect(() => {
-    if (props.isLogged === true) {
-      nameRef.current.focus();
-    }
-  }, []);
-  /*eslint-enable */
   const name = props.name;
   const email = props.email;
   const [subject, setSubject] = useState("");
@@ -42,7 +34,6 @@ const ContactForm = props => {
               type="text"
               placeholder="Name"
               name="name"
-              ref={nameRef}
               value={name}
               readOnly
               required

@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
+import * as serviceWorker from "./serviceWorker";
 import store from "./store/store";
 import firebase from "firebase";
+import "./index.css";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAIis6g8s3BLIKw_PPgQcl2GgE57rBqRp0",

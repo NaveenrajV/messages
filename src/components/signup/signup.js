@@ -1,27 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { register, AUTH_SUCCESS } from "../../actions/actions";
+import { register } from "../../actions/actionCreators";
+import { Link } from "react-router-dom";
 import Spinner from "../Spinner/Spinner";
-import classes from "./signup.module.css";
 import emailIcon from "../../assets/email.svg";
 import passwordIcon from "../../assets/lock.svg";
 import userIcon from "../../assets/user.svg";
-import { Link } from "react-router-dom";
+import classes from "./signup.module.css";
 
 const Signup = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [error, setError] = useState(false);
 
   const formSubmitHandler = event => {
     event.preventDefault();
     const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-    const pwd = document.querySelector("#password").value;
-    if (regex.test(pwd)) {
-      const history = props.history;
-      props.register(name, email, password, history);
+
+    if (regex.test(password)) {
+      props.register(name, email, password, props.history);
+      setError(false);
     } else {
-      document.querySelector(".password").style.display = "block";
+      setError(true);
     }
   };
 
@@ -83,12 +84,11 @@ const Signup = props => {
         </div>
 
         <center>
-          <div
-            className={[classes.error, "password"].join(" ")}
-            style={{ fontSize: "12px", fontWeight: "bold", display: "none" }}
-          >
-            Password must contain atleast one symbol,number,char
-          </div>
+          {error ? (
+            <div className={classes.error}>
+              Password must contain atleast one symbol,number,char
+            </div>
+          ) : null}
         </center>
 
         <>
@@ -115,12 +115,10 @@ const Signup = props => {
 
 const mapDispatchToProps = dispatch => ({
   register: (name, email, password, history) =>
-    dispatch(register(name, email, password, history)),
-  logged: data => dispatch({ type: AUTH_SUCCESS, data: data })
+    dispatch(register(name, email, password, history))
 });
 const mapStateToProps = state => ({
-  loading: state.loading,
-  loginStatus: state.loginStatus
+  loading: state.loading
 });
 
 export default connect(

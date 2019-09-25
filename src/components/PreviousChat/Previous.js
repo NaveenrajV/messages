@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import classes from "./Previous.module.css";
 import ticked from "../../assets/checked.svg";
+import classes from "./Previous.module.css";
+
 const Previous = props => {
   let data, keys, list;
 
