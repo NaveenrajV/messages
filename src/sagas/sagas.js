@@ -10,8 +10,10 @@ import {
   UPDATE_MESSAGES,
   UPDATE_MESSAGE,
   LOADING,
-  STOP_LOADING
+  STOP_LOADING,
+  LOGOUT_INIT
 } from "../actions/actions";
+import { logout } from "../actions/actionCreators";
 
 async function registration(email, password) {
   return await firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -68,25 +70,29 @@ async function authenticateLogin(email, password) {
 
 function* validateLogin(action) {
   let data, key, name, nameRef;
-  const { email, password, history } = action.payload;
+  const { email, password } = action.payload;
   try {
     yield call(authenticateLogin, email, password);
     yield put({ type: LOADING });
+
     const uid = firebase.auth().currentUser.uid;
+
     const recentPostsRef = firebase.database().ref(`/${uid}`);
     yield recentPostsRef.once("value").then(snapshot => {
       data = snapshot.val();
     });
     key = Object.keys(data)[0];
+
     nameRef = firebase.database().ref(`/${uid}/${key}/name`);
     yield nameRef.once("value").then(snapshot => {
       name = snapshot.val();
     });
-    history.push("/home");
+
     localStorage.setItem("isLogged", true);
     localStorage.setItem("name", name);
     localStorage.setItem("email", email);
     localStorage.setItem("data", JSON.stringify(data));
+
     yield put({ data, name, email, type: AUTH_SUCCESS });
   } catch (e) {
     console.log(e);
@@ -94,8 +100,19 @@ function* validateLogin(action) {
   }
 }
 
+function* logout_init() {
+  localStorage.removeItem("data");
+  localStorage.removeItem("isLogged");
+  localStorage.removeItem("name");
+  localStorage.removeItem("email");
+  yield put({ type: LOADING });
+  yield put(logout());
+  yield put({ type: STOP_LOADING });
+}
+
 export default function* rootSaga() {
   yield takeLatest(AUTH_VALIDATION, validateLogin);
   yield takeLatest(UPDATE_MESSAGE, update);
   yield takeLatest(REGISTER, register);
+  yield takeLatest(LOGOUT_INIT, logout_init);
 }

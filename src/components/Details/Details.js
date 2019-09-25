@@ -1,35 +1,23 @@
 import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { logout_init } from "../../actions/actionCreators";
 import Detail from "../Detail/Detail";
 import firebase from "firebase";
-import { connect } from "react-redux";
-import { logout, LOADING } from "../../actions/actions";
+import Spinner from "../Spinner/Spinner";
+import noData from "../../assets/noData.jpg";
 import classes from "./Details.module.css";
 import "./Table.module.css";
-import noData from "../../assets/noData.jpg";
-import Spinner from "../Spinner/Spinner";
 
 const Details = props => {
   let data,
     keys,
     list = [];
 
-  /*eslint-disable */
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      if (!user) {
-        props.history.push("/");
-        localStorage.removeItem("data");
-        localStorage.removeItem("isLogged");
-        localStorage.removeItem("name");
-        localStorage.removeItem("email");
-        props.loading();
-        setTimeout(() => {
-          props.logout();
-        }, 2000);
-      }
+      if (!user) props.logout();
     });
   }, []);
-  /*eslint-enable */
 
   if (props.data !== null) {
     data = props.data;
@@ -51,7 +39,7 @@ const Details = props => {
     list.splice(0, 1);
   }
 
-  return props.loading ? (
+  return !props.loading ? (
     <div className={classes.Details}>
       <div className={classes.title}>
         <div className={classes.welcome}>
@@ -98,17 +86,15 @@ const Details = props => {
     <Spinner />
   );
 };
-const mapStateToProps = state => {
-  return {
-    loading: state.loading,
-    isLogged: state.isLogged || localStorage.getItem("isLogged"),
-    data: state.data || localStorage.getItem("data"),
-    name: state.name || localStorage.getItem("name")
-  };
-};
+const mapStateToProps = state => ({
+  loading: state.loading,
+  isLogged: state.isLogged || localStorage.getItem("isLogged"),
+  data: state.data || localStorage.getItem("data"),
+  name: state.name || localStorage.getItem("name")
+});
+
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout()),
-  loading: () => dispatch({ type: LOADING })
+  logout: () => dispatch(logout_init())
 });
 export default connect(
   mapStateToProps,

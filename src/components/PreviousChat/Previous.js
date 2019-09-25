@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import classes from "./Previous.module.css";
 import ticked from "../../assets/checked.svg";
+import classes from "./Previous.module.css";
+
 const Previous = props => {
   let data, keys, list;
 
@@ -22,10 +23,6 @@ const Previous = props => {
   }
   return <div className={classes.messages}>{list}</div>;
 };
-const mapStateToProps = state => ({
-  data: state.data,
-  isLogged: state.isLogged
-});
 
 const MessageCard = props => {
   return (
@@ -40,6 +37,12 @@ const MessageCard = props => {
     </div>
   );
 };
+
+const mapStateToProps = state => ({
+  data: state.data,
+  isLogged: state.isLogged
+});
+
 export default connect(
   mapStateToProps,
   null

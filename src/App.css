@@ -4,10 +4,6 @@
 }
 
 .App {
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; */
   height: 100%;
   width: 100%;
   box-sizing: border-box;
@@ -41,6 +37,12 @@
   box-shadow: rgba(0, 0, 0, 0.3) 2px 5px 10px 2px;
   background-color: rgb(218, 147, 119);
 
+}
+
+.styleAnimate {
+  opacity: 1;
+  transition: "all .2s ease";
+  transform: "rotate(-90deg)";
 }
 
 @keyframes fadein {
