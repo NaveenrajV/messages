@@ -21,6 +21,7 @@ export const addMsg = (name, email, message, subject) => ({
   type: UPDATE_MESSAGE,
   data: { name, email, message, subject }
 });
+
 export const logout = () => ({ type: LOGOUT });
 export const logout_init = () => ({ type: LOGOUT_INIT });
 export const loading = () => ({ type: LOADING });

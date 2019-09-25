@@ -7,6 +7,7 @@ import {
   Route
 } from "react-router-dom";
 import ProtectedRoute from "./components/HOC/ProtectedRoute";
+import ErrorPage from "./components/ErrorPage/ErrorPage";
 import Details from "./components/Details/Details";
 import Chat from "./components/Chat/Chat";
 import Login from "./components/Login/Login";
@@ -14,7 +15,6 @@ import Signup from "./components/signup/signup";
 import chatIcon from "./assets/chatBubble.svg";
 import closeIcon from "./assets/close1.png";
 import "./App.css";
-import ErrorPage from "./components/ErrorPage/ErrorPage";
 
 function App(props) {
   let [displayChat, setToggle] = useState(false);
@@ -27,6 +27,7 @@ function App(props) {
       transform: "rotate(-90deg)"
     };
   }
+
   return (
     <div className="App">
       <Router>
